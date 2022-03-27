@@ -10,19 +10,22 @@ $('.saveBtn').on('click', function () {
 })
 
 
+var currentHour = moment().format('h');
 
 function timeUpdate() {
-    var currentHour = moment().format('h');
-    $(".row").each(function () {
-        var blockTime =($(this));
-        console.log(blockTime)
+    var nowTime = moment().hour();
+    console.log(nowTime)
 
-        if (blockTime < currentHour) {
+    $(".time-block").each(function () {
+        var timeBlock = parseInt($(this).attr("id").split("time")[1])
+
+
+        if (timeBlock < nowTime) {
             $(this).removeClass("future");
             $(this).removeClass("present");
             $(this).addClass("past");
         }
-        else if (blockTime === currentHour) {
+        else if (timeBlock === nowTime) {
             $(this).removeClass("past");
             $(this).removeClass("future");
             $(this).addClass("present");
