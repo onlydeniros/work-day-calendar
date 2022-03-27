@@ -1,9 +1,7 @@
 var today = moment().format("dddd, MMMM Do YYYY");
 $('#currentDay').html(today)
 
-
-var currentHour = moment().format('h');
-console.log(currentHour)
+// console.log(currentHour)
 
 $('.saveBtn').on('click', function () {
     var timeBlock = $(this).parent().attr('id')
@@ -11,18 +9,42 @@ $('.saveBtn').on('click', function () {
     localStorage.setItem(timeBlock, textInput)
 })
 
+
+
+function timeUpdate() {
+    var currentHour = moment().format('h');
+    $(".row").each(function () {
+        var blockTime =($(this));
+        console.log(blockTime)
+
+        if (blockTime < currentHour) {
+            $(this).removeClass("future");
+            $(this).removeClass("present");
+            $(this).addClass("past");
+        }
+        else if (blockTime === currentHour) {
+            $(this).removeClass("past");
+            $(this).removeClass("future");
+            $(this).addClass("present");
+        }
+        else {
+            $(this).removeClass("present");
+            $(this).removeClass("past");
+            $(this).addClass("future");
+
+        }
+    })
+}
+
 $('#time9 textarea').val(localStorage.getItem("time9"))
+$('#time10 textarea').val(localStorage.getItem("time10"))
+$('#time11 textarea').val(localStorage.getItem("time11"))
+$('#time12 textarea').val(localStorage.getItem("time12"))
+$('#time13 textarea').val(localStorage.getItem("time13"))
+$('#time14 textarea').val(localStorage.getItem("time14"))
+$('#time15 textarea').val(localStorage.getItem("time15"))
+$('#time16 textarea').val(localStorage.getItem("time16"))
+$('#time17 textarea').val(localStorage.getItem("time17"))
 
 
-
-// Local Storage
-
-// ar key = "stringkey";
-// var value = "value";
-// v
-// localStorage.setItem(key, value);
-// console.log(localStorage.getItem("stringkey"));
-
-// // Can only store Strings
-// localStorage.setItem(key, JSON.stringify(value));
-// console.log(JSON.parse(localStorage.getItem("stringkey")));
+timeUpdate()
